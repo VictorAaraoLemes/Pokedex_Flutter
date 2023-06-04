@@ -32,8 +32,8 @@ class MyApp extends StatelessWidget {
         ),
        debugShowCheckedModeBanner: false, // Adicionando o parâmetro aqui
         routes: {
-          AppRoutes.HOME: (context) => const PokemonsList(),
-          AppRoutes.SHOW: (context) => const PokemonShow(),
+          AppRoutes.HOME: (context) =>  PokemonsList(),
+          AppRoutes.SHOW: (context) =>  PokemonShow(),
           AppRoutes.FORM: (context) => PokemonForm(),
         },
       ),

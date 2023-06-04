@@ -4,11 +4,10 @@ import 'package:pokedex/providers/pokemon.dart';
 import 'package:pokedex/views/pokemons_list.dart';
 import 'package:provider/provider.dart';
 
-
 class PokemonForm extends StatelessWidget {
   final _form = GlobalKey<FormState>();
   final Map<String, Object> _formData = {
-    'id': '',    
+    'id': '',
     'name': '',
     'description': '',
     'type': '',
@@ -16,7 +15,7 @@ class PokemonForm extends StatelessWidget {
     'imageUrl': '',
   };
 
-  PokemonForm({super.key});
+  PokemonForm({Key? key});
 
   void _loadFormData(Pokemon pokemon) {
     _formData['id'] = pokemon.id;
@@ -28,11 +27,11 @@ class PokemonForm extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {    
+  Widget build(BuildContext context) {
     final args = ModalRoute.of(context)?.settings.arguments;
 
     if (args != null && (args as PokemonFormArguments).pokemon != null) {
-      Pokemon pokemon = args.pokemon as Pokemon;
+      Pokemon pokemon = args.pokemon!;
       _loadFormData(pokemon);
     }
 
@@ -49,7 +48,12 @@ class PokemonForm extends StatelessWidget {
             children: <Widget>[
               TextFormField(
                 initialValue: _formData['name'] as String,
-                decoration: const InputDecoration(labelText: 'Nome'),
+                decoration: InputDecoration(
+                  labelText: 'Nome',
+                  labelStyle: TextStyle(
+                    color: Colors.black, // Define a cor preta para o rótulo
+                  ),
+                ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Nome inválido!';
@@ -65,30 +69,64 @@ class PokemonForm extends StatelessWidget {
               ),
               TextFormField(
                 initialValue: _formData['description'] as String,
-                decoration: const InputDecoration(labelText: 'Descrição'),
+                decoration: InputDecoration(
+                  labelText: 'Descrição',
+                  labelStyle: TextStyle(
+                    color: Colors.black, // Define a cor preta para o rótulo
+                  ),                 
+                ),
                 onSaved: (value) => _formData['description'] = value as Object,
               ),
               TextFormField(
                 initialValue: _formData['type'] as String,
-                decoration: const InputDecoration(labelText: 'Tipo'),
+                decoration: InputDecoration(
+                  labelText: 'Tipo',
+                  labelStyle: TextStyle(
+                    color: Colors.black, // Define a cor preta para o rótulo
+                  ),
+                ),
                 onSaved: (value) => _formData['type'] = value as Object,
               ),
               TextFormField(
                 initialValue: _formData['power'].toString(),
-                decoration: const InputDecoration(labelText: 'Poder'),
+                decoration: InputDecoration(
+                  labelText: 'Poder',
+                  labelStyle: TextStyle(
+                    color: Colors.black, // Define a cor preta para o rótulo
+                  ),
+                ),
                 onSaved: (value) => _formData['power'] = value as Object,
               ),
               TextFormField(
                 initialValue: _formData['imageUrl'] as String,
-                decoration: const InputDecoration(labelText: 'Url da imagem'),
+                decoration: InputDecoration(
+                  labelText: 'Url da imagem',
+                  labelStyle: TextStyle(
+                    color: Colors.black, // Define a cor preta para o rótulo
+                  ),
+                ),
                 onSaved: (value) => _formData['imageUrl'] = value as Object,
               ),
               const SizedBox(height: 16),
-              FilledButton(onPressed: () => _hadleSubmit(context), child: const Text("Salvar"))
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Color(0xFFE89E9E), // Cor de fundo
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8), // Raio da borda
+                  ),
+                ),
+                onPressed: () => _hadleSubmit(context),
+                child: const Text(
+                  "Salvar",
+                  style: TextStyle(
+                    color: Colors.black, // Define a cor preta para o texto
+                  ),
+                ),
+              ),
             ],
           ),
         ),
-      )
+      ),
     );
   }
 
@@ -107,7 +145,7 @@ class PokemonForm extends StatelessWidget {
         ),
       );
       Navigator.pushAndRemoveUntil(
-        context, 
+        context,
         MaterialPageRoute<void>(
           builder: (BuildContext context) => const PokemonsList(),
         ),

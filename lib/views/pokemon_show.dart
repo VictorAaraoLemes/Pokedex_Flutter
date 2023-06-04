@@ -7,11 +7,12 @@ import 'package:pokedex/views/pokemons_list.dart';
 import 'package:provider/provider.dart';
 
 class PokemonShow extends StatelessWidget {
-  const PokemonShow({super.key});
+  const PokemonShow({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final args = ModalRoute.of(context)!.settings.arguments as PokemonShowArguments;
+    final args =
+        ModalRoute.of(context)!.settings.arguments as PokemonShowArguments;
     Pokemon pokemon = args.pokemon;
 
     return Scaffold(
@@ -24,31 +25,87 @@ class PokemonShow extends StatelessWidget {
         children: [
           Image(image: NetworkImage(pokemon.imageUrl), width: 256, height: 256),
           const SizedBox(height: 8),
-          Text(pokemon.name),
+          Text(
+            pokemon.name,
+            style: TextStyle(
+              fontFamily: 'Inter',
+              fontStyle: FontStyle.normal,
+              fontWeight: FontWeight.w600,
+              fontSize: 20,
+              height: 1.5,
+              color: Colors.black,
+            ),
+          ),
           const SizedBox(height: 12),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("Tipo: ${pokemon.type}"),
+              Text(
+                "Tipo: ${pokemon.type}",
+                style: TextStyle(
+                  fontFamily: 'Inter',
+                  fontStyle: FontStyle.normal,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 20,
+                  height: 1.5,
+                  color: Colors.black,
+                ),
+              ),
               const SizedBox(width: 32),
-              Text("Poder: ${pokemon.power}"),
+              Text(
+                "Poder: ${pokemon.power}",
+                style: TextStyle(
+                  fontFamily: 'Inter',
+                  fontStyle: FontStyle.normal,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 20,
+                  height: 1.5,
+                  color: Colors.black,
+                ),
+              ),
             ],
           ),
           const SizedBox(height: 12),
-          Text(pokemon.description),
+          Container(
+            alignment: Alignment.centerLeft,
+            padding: EdgeInsets.only(left: 800, right: 700),
+            child: Text(
+              pokemon.description,
+              style: TextStyle(
+                fontFamily: 'Inter',
+                fontStyle: FontStyle.normal,
+                fontWeight: FontWeight.w600,
+                fontSize: 20,
+                height: 1.5,
+                color: Colors.black,
+              ),
+            ),
+          ),
           const SizedBox(height: 16),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               FilledButton(
-                onPressed: () => _handleEditPokemon(context, pokemon), 
-                child: const Text("Editar")
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Color(0xFFE89E9E), // Cor de fundo
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8), // Raio da borda
+                  ),
+                ),
+                onPressed: () => _handleEditPokemon(context, pokemon),
+                child: const Text("Editar", style: TextStyle(color: Colors.black)), // Define a cor preta para o texto
               ),
               const SizedBox(width: 16),
               FilledButton(
-                onPressed: () => _handleDeletePokemon(context, pokemon), 
-                child: const Text("Excluir")
-              )            
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Color(0xFFE89E9E), // Cor de fundo
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8), // Raio da borda
+                  ),
+                ),
+                onPressed: () => _handleDeletePokemon(context, pokemon),
+                child: const Text("Excluir", style: TextStyle(color: Colors.black)), // Define a cor preta para o texto
+              ),
             ],
           )
         ],
@@ -58,9 +115,9 @@ class PokemonShow extends StatelessWidget {
 
   void _handleEditPokemon(BuildContext context, Pokemon pokemon) {
     Navigator.pushNamed(
-      context, 
+      context,
       AppRoutes.FORM,
-      arguments: PokemonFormArguments(pokemon)
+      arguments: PokemonFormArguments(pokemon),
     );
   }
 
@@ -83,7 +140,7 @@ class PokemonShow extends StatelessWidget {
             onPressed: () {
               Provider.of<Pokemons>(context, listen: false).remove(pokemon);
               Navigator.pushAndRemoveUntil(
-                context, 
+                context,
                 MaterialPageRoute<void>(
                   builder: (BuildContext context) => const PokemonsList(),
                 ),
