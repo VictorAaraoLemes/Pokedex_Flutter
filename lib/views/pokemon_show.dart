@@ -66,19 +66,15 @@ class PokemonShow extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 12),
-          Container(
-            alignment: Alignment.centerLeft,
-            padding: EdgeInsets.only(left: 800, right: 700),
-            child: Text(
-              pokemon.description,
-              style: TextStyle(
-                fontFamily: 'Inter',
-                fontStyle: FontStyle.normal,
-                fontWeight: FontWeight.w600,
-                fontSize: 20,
-                height: 1.5,
-                color: Colors.black,
-              ),
+          Text(
+            pokemon.description,
+            style: TextStyle(
+              fontFamily: 'Inter',
+              fontStyle: FontStyle.normal,
+              fontWeight: FontWeight.w600,
+              fontSize: 20,
+              height: 1.5,
+              color: Colors.black,
             ),
           ),
           const SizedBox(height: 16),
@@ -93,7 +89,10 @@ class PokemonShow extends StatelessWidget {
                   ),
                 ),
                 onPressed: () => _handleEditPokemon(context, pokemon),
-                child: const Text("Editar", style: TextStyle(color: Colors.black)), // Define a cor preta para o texto
+                child: const Text(
+                  "Editar",
+                  style: TextStyle(color: Colors.black),
+                ),
               ),
               const SizedBox(width: 16),
               FilledButton(
@@ -104,7 +103,10 @@ class PokemonShow extends StatelessWidget {
                   ),
                 ),
                 onPressed: () => _handleDeletePokemon(context, pokemon),
-                child: const Text("Excluir", style: TextStyle(color: Colors.black)), // Define a cor preta para o texto
+                child: const Text(
+                  "Excluir",
+                  style: TextStyle(color: Colors.black),
+                ),
               ),
             ],
           )
