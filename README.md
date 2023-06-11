@@ -2,6 +2,9 @@
 
 A new Flutter project.
 
+## Home Page and Pokemon                                   
+![homePage](./FinalProject/Home.png) ![Pokemon](./FinalProject/Pokemon.png)                     
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
